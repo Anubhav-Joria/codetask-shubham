@@ -16,7 +16,7 @@ app.use(bodyParser.json()); // to support JSON-encoded bodies
 require("./models"); // DB connection
 require("./controllers/index")(app);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Serving on port ${PORT}`);

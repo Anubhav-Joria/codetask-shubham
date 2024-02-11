@@ -23,7 +23,17 @@ connectToDB();
 const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db.user = require("./users")(sequelize, DataTypes);
+
+db.User = require('./users')(sequelize, Sequelize);
+db.Contact = require('./Contact')(sequelize, Sequelize);
+db.SpamReport = require('./SpamReport')(sequelize, Sequelize);
+
+// Define associations
+db.User.hasMany(db.Contact);
+db.Contact.belongsTo(db.User, { foreignKey: "userId" });
+
+db.User.hasMany(db.SpamReport);
+db.SpamReport.belongsTo(db.User, { foreignKey: 'userId' });
 
 sequelize.sync({ force: false });
 
